@@ -9,7 +9,7 @@ import Vapor
 
 class AuthController {
     func register(_ req: Request) throws -> EventLoopFuture<RegisterResponse> {
-        guard let body = try? req.content.decode(RegisterRequest.self) else {
+        guard let body = try? req.content.decode(UserDataRequest.self) else {
             throw Abort(.badRequest)
         }
         
@@ -35,12 +35,12 @@ class AuthController {
         return req.eventLoop.future(response)
     }
     
-    func logout(_ req: Request) throws -> EventLoopFuture<LogoutResponse> {
+    func logout(_ req: Request) throws -> EventLoopFuture<CommonResponse> {
         guard let body = try? req.content.decode(LogoutRequest.self) else {
             throw Abort(.badRequest)
         }
         
-        let response = LogoutResponse(result: 1, error_message: nil)
+        let response = CommonResponse(result: 1, error_message: nil)
         
         return req.eventLoop.future(response)
     }
