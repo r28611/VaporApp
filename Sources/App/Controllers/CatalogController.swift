@@ -28,4 +28,18 @@ class CatalogController {
         
         return req.eventLoop.future(response)
     }
+    
+    func getReviews(_ req: Request) throws -> EventLoopFuture<[Review]> {
+        guard let body = try? req.content.decode(ReviewsRequest.self) else {
+            throw Abort(.badRequest)
+        }
+        
+        let response = [
+            Review(id_user: Int.random(in: 1...99), text: "Текст отзыва о товаре \(body.id_product)", id_comment: nil),
+            Review(id_user: Int.random(in: 1...99), text: "Текст отзыва о товаре \(body.id_product)", id_comment: nil),
+            Review(id_user: Int.random(in: 1...99), text: "Текст отзыва о товаре \(body.id_product)", id_comment: nil)
+        ]
+        
+        return req.eventLoop.future(response)
+    }
 }
