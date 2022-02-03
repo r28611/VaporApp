@@ -26,4 +26,16 @@ class UserAreaController {
         
         return req.eventLoop.future(response)
     }
+    
+    func deleteReview(_ req: Request) throws -> EventLoopFuture<CommonResponse> {
+        guard let body = try? req.content.decode(Review.self) else {
+            throw Abort(.badRequest)
+        }
+        guard let reviewId = body.id_comment,
+              reviewId == 123 else {
+            throw Abort(.badRequest)
+        }
+        let response = CommonResponse(result: 1, error_message: nil)
+        return req.eventLoop.future(response)
+    }
 }
