@@ -17,6 +17,7 @@ func routes(_ app: Application) throws {
     
     let userAreaController = UserAreaController()
     app.post("changeUserData", use: userAreaController.changeUserData)
+    app.post("addReview", use: userAreaController.addReview)
     
     let catalog = CatalogController()
     app.post("catalogData", use: catalog.getCatalog)

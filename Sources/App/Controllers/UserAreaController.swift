@@ -17,4 +17,13 @@ class UserAreaController {
         
         return req.eventLoop.future(response)
     }
+    
+    func addReview(_ req: Request) throws -> EventLoopFuture<ResponseWithMessage> {
+        guard let body = try? req.content.decode(Review.self) else {
+            throw Abort(.badRequest)
+        }
+        let response = ResponseWithMessage(result: 1, user_message: "Ваш отзыв был передан на модерацию", error_message: nil)
+        
+        return req.eventLoop.future(response)
+    }
 }
