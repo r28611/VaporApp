@@ -16,13 +16,13 @@ func routes(_ app: Application) throws {
     app.post("logout", use: controller.logout)
     
     let userAreaController = UserAreaController()
-    app.post("changeUserData", use: userAreaController.changeUserData)
+    app.patch("changeUserData", use: userAreaController.changeUserData)
     app.post("addReview", use: userAreaController.addReview)
-    app.post("deleteReview", use: userAreaController.deleteReview)
+    app.delete("deleteReview", use: userAreaController.deleteReview)
     
     let catalog = CatalogController()
-    app.post("catalogData", use: catalog.getCatalog)
-    app.post("getGoodById", use: catalog.getProduct)
+    app.get("catalogData", use: catalog.getCatalog)
+    app.get("getGoodById", use: catalog.getProduct)
     app.get("getProductReviews", use: catalog.getReviews)
     try app.register(collection: TodoController())
 }
