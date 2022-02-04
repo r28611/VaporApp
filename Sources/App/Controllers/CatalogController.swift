@@ -9,7 +9,7 @@ import Vapor
 
 class CatalogController {
     func getCatalog(_ req: Request) throws -> EventLoopFuture<[Product]> {
-        guard let body = try? req.content.decode(CatalogRequest.self) else {
+        guard let body = try? req.query.decode(CatalogRequest.self) else {
             throw Abort(.badRequest)
         }
         let response = [
@@ -21,7 +21,7 @@ class CatalogController {
     }
     
     func getProduct(_ req: Request) throws -> EventLoopFuture<ProductDataResponse> {
-        guard let body = try? req.content.decode(ProductRequest.self) else {
+        guard let body = try? req.query.decode(ProductRequest.self) else {
             throw Abort(.badRequest)
         }
         let response = ProductDataResponse(result: 1, product_name: "Название", product_price: 123, product_description: "Описание", error_message: nil)
@@ -30,7 +30,7 @@ class CatalogController {
     }
     
     func getReviews(_ req: Request) throws -> EventLoopFuture<[Review]> {
-        guard let body = try? req.content.decode(ReviewsRequest.self) else {
+        guard let body = try? req.query.decode(ReviewsRequest.self) else {
             throw Abort(.badRequest)
         }
         
