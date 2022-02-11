@@ -5,11 +5,7 @@ func routes(_ app: Application) throws {
     app.get { req in
         return "It works!"
     }
-
-    app.get("hello") { req -> String in
-        return "Hello, world!"
-    }
-
+    
     let controller = AuthController()
     app.post("register", use: controller.register)
     app.post("login", use: controller.login)
@@ -24,5 +20,9 @@ func routes(_ app: Application) throws {
     app.get("catalogData", use: catalog.getCatalog)
     app.get("getGoodById", use: catalog.getProduct)
     app.get("getProductReviews", use: catalog.getReviews)
-    try app.register(collection: TodoController())
+
+    let basket = UserBasket()
+    app.post("addToBasket", use: basket.addProductToBasket)
+    app.delete("deleteFromBasket", use: basket.deleteProductFromBasket)
+    app.post("payBasket", use: basket.pay)
 }
